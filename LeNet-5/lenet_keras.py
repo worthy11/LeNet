@@ -14,7 +14,7 @@ y_train= to_categorical(y_train, 10)
 y_test = to_categorical(y_test, 10)
 
 lenet = keras.Sequential()
-
+keras.layers.Conv2D()
 lenet.add(keras.layers.Conv2D(filters=6, kernel_size=(5,5), strides=(1,1), padding='same', activation='tanh', use_bias=True))
 lenet.add(keras.layers.AveragePooling2D(pool_size=(2,2), strides=(2,2), padding='valid'))
 lenet.add(keras.layers.Conv2D(filters=16, kernel_size=(5,5), strides=(1,1), padding='same', activation='tanh', use_bias=True))

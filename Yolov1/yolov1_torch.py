@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import config
+import Yolov1.config as config
 
 class Layer(nn.Module):
     def __init__(self, in_channels, out_channels, **kwargs):
