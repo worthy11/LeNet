@@ -2,23 +2,31 @@ import keras
 # import keras2onxx
 import matplotlib.pyplot as plt
 from data_loader import *
-from model import *
+from arc import *
 
-lenet = InitializeModel()
-batch_size = 4
-epochs = 5
+class LeNet5():
+    def __init__(self, test_set, test_labels, train_set, train_labels, epochs=5, batch_size=4, learning_rate=0.1):
+        self.model = InitializeModel()
+        self.train_set = train_set         
+        self.train_labels = train_labels         
+        self.test_set = test_set         
+        self.test_labels = test_labels
+        self.epochs = epochs
+        self.batch_size = batch_size
+        self.learning_rate = learning_rate
 
-lenet.compile(loss=keras.losses.categorical_crossentropy, optimizer='SGD', metrics=['accuracy'])
-history = lenet.fit(x=train_set, y=train_labels, epochs=epochs, batch_size=batch_size, validation_data=(test_set, test_labels), verbose=1)
-results = lenet.evaluate(test_set, test_labels)
-    
-print('Loss: {}\nAccuracy: {}'.format(results[0],results[1]))
+    def TrainModel(self):
+        history = self.model.fit(x=self.train_set, y=self.train_labels, epochs=self.epochs, batch_size=self.batch_size, validation_data=(self.test_set, self.test_labels), verbose=1)
+        results = self.model.evaluate(self.test_set, self.test_labels)
+        print('Loss: {}\nAccuracy: {}'.format(results[0], results[1]))
 
-# while (True):
-#     img = test_set[np.random.randint(0, len(test_set))]
-#     img = np.expand_dims(img, axis=0)
-#     label = np.argmax(lenet.predict(x=img, batch_size=1))
-#     plt.imshow(img[0, :, :, :])
-#     plt.title(classes[label])
-#     plt.show()
-#     key = input()
+        return (history, results)
+        
+    def Predict(self):
+        sample = self.test_set[np.random.randint(0, len(self.test_set))]
+        sample = np.expand_dims(sample, axis=0)
+        label = np.argmax(self.model.predict(x=sample, batch_size=1))
+        plt.imshow(sample[0, :, :, :])
+        plt.title(classes[label])
+        plt.show()
+        key = input()
