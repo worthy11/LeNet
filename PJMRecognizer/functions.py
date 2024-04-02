@@ -87,12 +87,11 @@ def ConvertToSample(hand_landmarks) -> np.array:
     received = np.array(coords)
     observed = ComputeDistances(received, 2)
     observed = observed.reshape(21*21)
-    # print(observed)
     return observed
 
 def RecognizeLetter(hand_landmarks: np.array, w: int, h: int) -> str:
     coords = list()
-    expected = np.load('base.npy')
+    expected = np.load('data/base.npy')
     errors = np.empty(len(letters))
     
     for landmark in hand_landmarks.landmark:
@@ -153,7 +152,7 @@ def CreateBase():
 
     letters = np.array(letters)
     distances = ComputeDistances(letters, 3)
-    np.save('base.npy', distances)
+    np.save('data/base.npy', distances)
     print('Base created successfully')
 
 def EditBase():
@@ -161,9 +160,9 @@ def EditBase():
 
 def AddNewSample(sample: np.array, label: str, filepath: str='pjm_testing_set.csv'):
     sample = list([str(_) for _ in sample])
-    with open(filepath, 'a', newline='') as file:
+    with open('data/'+filepath, 'a', newline='') as file:
         writer = csv.writer(file, delimiter=',')
-        if os.path.getsize('./{}'.format(filepath)) == 0:
+        if os.path.getsize('./PJMRecognizer/data/{}'.format(filepath)) == 0:
             columns = list()
             columns.append('label')
             for _, data in enumerate(sample):
@@ -172,7 +171,7 @@ def AddNewSample(sample: np.array, label: str, filepath: str='pjm_testing_set.cs
         writer.writerow([label] + sample)
 
 def DeleteLastSample(filepath: str):
-    f = open(filepath, 'w')
+    f = open('data/'+filepath, 'w')
     lines = f.readlines()
     lines = lines[:-1]
 
