@@ -1,8 +1,7 @@
 # import keras2onxx
-from keras.layers import Dense, Flatten, BatchNormalization, Dropout
+from keras.layers import Dense, Flatten
 from keras.models import Sequential, load_model
 from keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
-from numpy.testing import assert_allclose
 import os
 from data_loader import *
 
@@ -46,7 +45,6 @@ class Model():
                                      validation_data=(test_set, test_labels),
                                      callbacks = callbacks_list)
             new_model = load_model(filepath)
-            # assert_allclose(self.model.predict(train_set), new_model.predict(train_set), 1e-5)
             self.model = new_model
             self.model.compile(loss='categorical_crossentropy', optimizer='adam')
 
@@ -58,7 +56,7 @@ class Model():
                                      validation_data=(test_set, test_labels),
                                      callbacks = [self.learning_rate])
         results = self.model.evaluate(test_set, test_labels)
-        # print('Loss: {}\nAccuracy: {}'.format(results[0], results[1]))
+        print('Results: '.format(results))
         return (history, results)
         
     def Predict(self, sample: np.array) -> str:
