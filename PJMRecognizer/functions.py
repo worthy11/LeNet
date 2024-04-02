@@ -160,7 +160,7 @@ def EditBase():
 
 def AddNewSample(sample: np.array, label: str, filepath: str='pjm_testing_set.csv'):
     sample = list([str(_) for _ in sample])
-    with open('data/'+filepath, 'a', newline='') as file:
+    with open('PJMRecognizer/data/'+filepath, 'a', newline='') as file:
         writer = csv.writer(file, delimiter=',')
         if os.path.getsize('./PJMRecognizer/data/{}'.format(filepath)) == 0:
             columns = list()

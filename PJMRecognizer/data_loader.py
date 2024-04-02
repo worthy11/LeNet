@@ -3,8 +3,8 @@ import numpy as np
 from keras.utils import to_categorical
 
 def LoadData(num_classes):
-    sign_mnist_train = np.array(pd.read_csv("data/pjm_training_set.csv"))
-    sign_mnist_test = np.array(pd.read_csv("data/pjm_testing_set.csv"))
+    sign_mnist_train = np.array(pd.read_csv("PJMRecognizer/data/pjm_training_set.csv"))
+    sign_mnist_test = np.array(pd.read_csv("PJMRecognizer/data/pjm_testing_set.csv"))
 
     train_set = sign_mnist_train[:, 1:]
     train_labels = sign_mnist_train[:, 0]
