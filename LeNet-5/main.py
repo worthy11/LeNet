@@ -1,8 +1,9 @@
-import cv2
-import numpy as np
-import matplotlib.pyplot as plt
 from lenet_keras import *
+from preprocessing import *
 
+(train_set, train_labels), (test_set, test_labels), classes = LoadData()
+model = LeNet5(train_set, train_labels, test_set, test_labels, classes, epochs=0)
+model.TrainModel()
 capture = cv2.VideoCapture(0)
 img: cv2.Mat
 
@@ -15,11 +16,7 @@ while(True):
     sample = np.array(crop)
     sample = np.expand_dims(sample, axis=-1)
     sample = np.expand_dims(sample, axis=0)
-    label = np.argmax(lenet.predict(x=sample, batch_size=1))
-
-    plt.imshow(sample[0, :, :, :])
-    plt.title(classes[label])
-    plt.show()
-
-    cv2.imshow('Main', img)
+    label = model.Predict(sample)
+    cv2.putText(img, label, (300, 70), cv2.FONT_HERSHEY_PLAIN, 5, (255, 255, 255), 5) # Display result
+    cv2.imshow('Image', img)
     cv2.waitKey(1)

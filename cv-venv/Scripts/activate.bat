@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\kinga\Documents\VS Code\networks\cv-venv
+set VIRTUAL_ENV=C:\Users\slota\Documents\VS Code\networks\cv-venv
 
 if not defined PROMPT set PROMPT=$P$G
 
