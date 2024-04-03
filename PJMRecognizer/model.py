@@ -35,7 +35,7 @@ class Model():
         (train_set, train_labels), (test_set, test_labels) = LoadData(len(self.classes))
 
         if to_checkpoint:
-            filepath = 'model.keras'
+            filepath = 'PJMRecognizer/model.keras'
             checkpoint = ModelCheckpoint(filepath, monitor='loss', verbose=1, save_best_only=True, mode='min')
             callbacks_list = [checkpoint]
             history = self.model.fit(train_set,
