@@ -1,6 +1,5 @@
-keras==
-numpy==
-opencv-python==
-mediapipe==
-torch==
-torchvision==
+keras==3.1.1
+tensorflow==2.16.1
+numpy==1.26.4
+torch==2.2.2
+torchvision==0.17.2
